@@ -5,17 +5,34 @@
  */
 package br.com.info10.telas;
 
+import java.sql.*;
+import br.com.info10.dal.Modulo_Conexao;
+
 /**
  *
  * @author marco
  */
-public class Tela_Login extends javax.swing.JFrame {
+public class Tela_Login extends javax.swing.JFrame 
+{
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    
 
     /**
      * Creates new form Tela_Login
      */
-    public Tela_Login() {
+    public Tela_Login() 
+    {
         initComponents();
+        conexao = Modulo_Conexao.conector();
+        
+        if (conexao != null)
+        {
+            lbl_Status.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/info10/icones/db_Ok.png")));
+        } else { 
+           lbl_Status.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/info10/icones/db_Error.png")));
+        }
     }
 
     /**
@@ -32,10 +49,11 @@ public class Tela_Login extends javax.swing.JFrame {
         txt_Usuario = new javax.swing.JTextField();
         btn_login = new javax.swing.JButton();
         txt_Pasword = new javax.swing.JPasswordField();
+        lbl_Status = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Info10 - System Login");
-        setPreferredSize(new java.awt.Dimension(400, 200));
+        setPreferredSize(new java.awt.Dimension(400, 250));
         setResizable(false);
 
         jLabel1.setText("Usuário:");
@@ -44,21 +62,28 @@ public class Tela_Login extends javax.swing.JFrame {
 
         btn_login.setText("Login");
 
+        lbl_Status.setText("Status");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_Usuario)
-                    .addComponent(txt_Pasword, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                    .addComponent(btn_login, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(79, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_Usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                            .addComponent(txt_Pasword)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbl_Status, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                        .addComponent(btn_login, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -72,8 +97,10 @@ public class Tela_Login extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txt_Pasword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_login)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_login)
+                    .addComponent(lbl_Status, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
 
         pack();
@@ -119,6 +146,7 @@ public class Tela_Login extends javax.swing.JFrame {
     private javax.swing.JButton btn_login;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lbl_Status;
     private javax.swing.JPasswordField txt_Pasword;
     private javax.swing.JTextField txt_Usuario;
     // End of variables declaration//GEN-END:variables
