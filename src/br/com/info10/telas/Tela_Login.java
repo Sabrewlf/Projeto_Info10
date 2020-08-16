@@ -7,6 +7,7 @@ package br.com.info10.telas;
 
 import java.sql.*;
 import br.com.info10.dal.Modulo_Conexao;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,6 +18,37 @@ public class Tela_Login extends javax.swing.JFrame
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+    
+    public void Logar()
+    {
+        String sql = "select * from usuarios where login = ? and senha = ?";
+        
+        try {
+            //Consulta o banco de dados atraves do texto digitado nos textbox
+            //o sinal de interrogação será substituido pelo que for digitado nos textbox
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, txt_Usuario.getText());
+            pst.setString(2, txt_Password.getText());
+            
+            //executando a consulta(Query)
+            rs = pst.executeQuery();
+            
+            //validando usuario e senha
+            
+            if (rs.next())
+            {
+                frm_Principal frm = new frm_Principal();
+                frm.setVisible(true);
+                
+            }else{
+                JOptionPane.showMessageDialog(null, "Usuario e/ou Senha Inválidos(a)!");
+            }
+            
+        } catch (Exception e) {
+            
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
     
 
     /**
@@ -48,7 +80,7 @@ public class Tela_Login extends javax.swing.JFrame
         jLabel2 = new javax.swing.JLabel();
         txt_Usuario = new javax.swing.JTextField();
         btn_login = new javax.swing.JButton();
-        txt_Pasword = new javax.swing.JPasswordField();
+        txt_Password = new javax.swing.JPasswordField();
         lbl_Status = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,6 +93,11 @@ public class Tela_Login extends javax.swing.JFrame
         jLabel2.setText("Senha:");
 
         btn_login.setText("Login");
+        btn_login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_loginActionPerformed(evt);
+            }
+        });
 
         lbl_Status.setText("Status");
 
@@ -78,7 +115,7 @@ public class Tela_Login extends javax.swing.JFrame
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txt_Usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                            .addComponent(txt_Pasword)))
+                            .addComponent(txt_Password)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbl_Status, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
@@ -95,17 +132,22 @@ public class Tela_Login extends javax.swing.JFrame
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(txt_Pasword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_login)
                     .addComponent(lbl_Status, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(364, 243));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
+        //Chamando o método logar...
+        Logar();
+    }//GEN-LAST:event_btn_loginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,7 +189,7 @@ public class Tela_Login extends javax.swing.JFrame
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lbl_Status;
-    private javax.swing.JPasswordField txt_Pasword;
+    private javax.swing.JPasswordField txt_Password;
     private javax.swing.JTextField txt_Usuario;
     // End of variables declaration//GEN-END:variables
 }
