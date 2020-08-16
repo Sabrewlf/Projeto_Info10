@@ -39,6 +39,8 @@ public class Tela_Login extends javax.swing.JFrame
             {
                 frm_Principal frm = new frm_Principal();
                 frm.setVisible(true);
+                this.dispose();
+                conexao.close();
                 
             }else{
                 JOptionPane.showMessageDialog(null, "Usuario e/ou Senha Inválidos(a)!");
