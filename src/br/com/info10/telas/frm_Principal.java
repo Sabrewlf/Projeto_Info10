@@ -42,8 +42,8 @@ public class frm_Principal extends javax.swing.JFrame {
         menu_Add_Usuario = new javax.swing.JMenuItem();
         menu_Relatorio = new javax.swing.JMenu();
         menu_Servicos = new javax.swing.JMenuItem();
-        menu_Sobre = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        menu_Ajuda = new javax.swing.JMenu();
+        menu_Sobre = new javax.swing.JMenuItem();
         menu_Opcoes = new javax.swing.JMenu();
         meu_Sair = new javax.swing.JMenuItem();
 
@@ -87,11 +87,13 @@ public class frm_Principal extends javax.swing.JFrame {
 
         menu_Add_Usuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK));
         menu_Add_Usuario.setText("Usuários");
+        menu_Add_Usuario.setEnabled(false);
         menu_Cadastro.add(menu_Add_Usuario);
 
         jMenuBar1.add(menu_Cadastro);
 
         menu_Relatorio.setText("Relatório");
+        menu_Relatorio.setEnabled(false);
 
         menu_Servicos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
         menu_Servicos.setText("Serviços");
@@ -99,13 +101,18 @@ public class frm_Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(menu_Relatorio);
 
-        menu_Sobre.setText("Ajuda");
+        menu_Ajuda.setText("Ajuda");
 
-        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItem5.setText("Sobre");
-        menu_Sobre.add(jMenuItem5);
+        menu_Sobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.ALT_MASK));
+        menu_Sobre.setText("Sobre");
+        menu_Sobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_SobreActionPerformed(evt);
+            }
+        });
+        menu_Ajuda.add(menu_Sobre);
 
-        jMenuBar1.add(menu_Sobre);
+        jMenuBar1.add(menu_Ajuda);
 
         menu_Opcoes.setText("Opções");
         menu_Opcoes.addActionListener(new java.awt.event.ActionListener() {
@@ -179,6 +186,13 @@ public class frm_Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_meu_SairActionPerformed
 
+    private void menu_SobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SobreActionPerformed
+        // Chamando a tela sobre
+        frm_Sobre sobre = new frm_Sobre();
+        sobre.setVisible(true);
+        
+    }//GEN-LAST:event_menu_SobreActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -218,17 +232,17 @@ public class frm_Principal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane deskTop;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JLabel lbl_Data;
-    private javax.swing.JLabel lbl_Usuario;
+    public static javax.swing.JLabel lbl_Usuario;
     private javax.swing.JMenuItem menu_Add_Cliente;
     private javax.swing.JMenuItem menu_Add_Os;
-    private javax.swing.JMenuItem menu_Add_Usuario;
+    public static javax.swing.JMenuItem menu_Add_Usuario;
+    private javax.swing.JMenu menu_Ajuda;
     private javax.swing.JMenu menu_Cadastro;
     private javax.swing.JMenu menu_Opcoes;
-    private javax.swing.JMenu menu_Relatorio;
+    public static javax.swing.JMenu menu_Relatorio;
     private javax.swing.JMenuItem menu_Servicos;
-    private javax.swing.JMenu menu_Sobre;
+    private javax.swing.JMenuItem menu_Sobre;
     private javax.swing.JMenuItem meu_Sair;
     // End of variables declaration//GEN-END:variables
 

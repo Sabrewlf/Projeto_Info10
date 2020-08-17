@@ -7,6 +7,7 @@ package br.com.info10.telas;
 
 import java.sql.*;
 import br.com.info10.dal.Modulo_Conexao;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -37,11 +38,26 @@ public class Tela_Login extends javax.swing.JFrame
             
             if (rs.next())
             {
+                //Comando abaixo valida o conteudo do campo perfil da tabela usuario
+                String perfil = rs.getString(6);
+                
+                //libera ou nao o perfil
+                
+                if(perfil.equals("admin"))
+                {
                 frm_Principal frm = new frm_Principal();
                 frm.setVisible(true);
+                frm_Principal.menu_Relatorio.setEnabled(true);
+                frm_Principal.menu_Add_Usuario.setEnabled(true);
+                frm_Principal.lbl_Usuario.setText(rs.getString(2));
+                frm_Principal.lbl_Usuario.setForeground(Color.red);
                 this.dispose();
                 conexao.close();
-                
+                }else{
+                     frm_Principal frm = new frm_Principal();
+                     frm.setVisible(true);
+                     this.dispose();
+                    }    
             }else{
                 JOptionPane.showMessageDialog(null, "Usuario e/ou Senha Inválidos(a)!");
             }
