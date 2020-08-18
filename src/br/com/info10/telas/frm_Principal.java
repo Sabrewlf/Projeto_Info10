@@ -67,7 +67,7 @@ public class frm_Principal extends javax.swing.JFrame {
             .addGap(0, 480, Short.MAX_VALUE)
         );
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/info10/icones/icons8-java-144.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/info10/icones/3d_system_folder_20520 (2).png"))); // NOI18N
 
         lbl_Usuario.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbl_Usuario.setText("Usuário");
