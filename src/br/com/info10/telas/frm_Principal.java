@@ -88,6 +88,11 @@ public class frm_Principal extends javax.swing.JFrame {
         menu_Add_Usuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK));
         menu_Add_Usuario.setText("Usuários");
         menu_Add_Usuario.setEnabled(false);
+        menu_Add_Usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_Add_UsuarioActionPerformed(evt);
+            }
+        });
         menu_Cadastro.add(menu_Add_Usuario);
 
         jMenuBar1.add(menu_Cadastro);
@@ -192,6 +197,13 @@ public class frm_Principal extends javax.swing.JFrame {
         sobre.setVisible(true);
         
     }//GEN-LAST:event_menu_SobreActionPerformed
+
+    private void menu_Add_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Add_UsuarioActionPerformed
+        // Chamando tela frm_Tela_Usuarios dentro do DesktopPane.
+        frm_Tela_Usuarios usuarios = new frm_Tela_Usuarios();
+        usuarios.setVisible(true);
+        deskTop.add(usuarios);
+    }//GEN-LAST:event_menu_Add_UsuarioActionPerformed
 
     /**
      * @param args the command line arguments
