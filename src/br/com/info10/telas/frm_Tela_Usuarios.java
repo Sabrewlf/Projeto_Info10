@@ -55,7 +55,6 @@ public class frm_Tela_Usuarios extends javax.swing.JInternalFrame {
                 txt_Telefone.setText(null);
                 txt_Login.setText(null);
                 txt_Senha.setText(null);
-                cb_Perfil.setSelectedItem(null);
 
             }
 
@@ -66,43 +65,83 @@ public class frm_Tela_Usuarios extends javax.swing.JInternalFrame {
     }
 
     private void Adicionar() {
-        String sql = "insert into usuarios(id_User, usuario, telefone, login, senha, perfil) values(?,?,?,?,?,?)";
 
-        try {
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1, txt_Id.getText());
-            pst.setString(2, txt_Nome.getText());
-            pst.setString(3, txt_Telefone.getText());
-            pst.setString(4, txt_Login.getText());
-            pst.setString(5, txt_Senha.getText());
-            pst.setString(6, cb_Perfil.getSelectedItem().toString());
-            //Validação de campos obrigatórios
-            if ((txt_Id.getText().isEmpty() || txt_Nome.getText().isEmpty() || txt_Telefone.getText().isEmpty() || txt_Login.getText().isEmpty() || txt_Senha.getText().isEmpty())) {
-                JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios.");//verificar registro inserido com sucesso ..erro
+        if ((txt_Id.getText().isEmpty() || txt_Nome.getText().isEmpty() || txt_Telefone.getText().isEmpty() || txt_Login.getText().isEmpty() || txt_Senha.getText().isEmpty())) {
+            JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios.");
+        } else {
 
-            } else {
+            String sql = "insert into usuarios(id_User, usuario, telefone, login, senha, perfil) values(?,?,?,?,?,?)";
+
+            try {
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, txt_Id.getText());
+                pst.setString(2, txt_Nome.getText());
+                pst.setString(3, txt_Telefone.getText());
+                pst.setString(4, txt_Login.getText());
+                pst.setString(5, txt_Senha.getText());
+                pst.setString(6, cb_Perfil.getSelectedItem().toString());
+                //Validação de campos obrigatórios
+
+                //Atualizando atabela com os dados do usuario
+                //Confirmação de inserção de dados na tabela
+                int adicionado = pst.executeUpdate();
+
+                if (adicionado > 0) {
+                    JOptionPane.showMessageDialog(null, "Registro inserido com sucesso!");
+                    //Limpando os camposset
+                    txt_Id.setText(null);
+                    txt_Nome.setText(null);
+                    txt_Telefone.setText(null);
+                    txt_Login.setText(null);
+                    txt_Senha.setText(null);
+
+                } else {
+                }
+            } catch (Exception e) {
+
+                JOptionPane.showMessageDialog(null, e);
             }
-
-            //Atualizando atabela com os dados do usuario
-            //Confirmação de inserção de dados na tabela
-            int adicionado = pst.executeUpdate();
-
-            if (adicionado > 0) {
-                JOptionPane.showMessageDialog(null, "Registro inserido com sucesso!");
-                //Limpando os camposset
-                txt_Id.setText(null);
-                txt_Nome.setText(null);
-                txt_Telefone.setText(null);
-                txt_Login.setText(null);
-                txt_Senha.setText(null);
-                cb_Perfil.setSelectedItem(null);
-
-            } else {
-            }
-        } catch (Exception e) {
-
-            JOptionPane.showMessageDialog(null, e);
         }
+
+    }
+
+    //Método alterar usuário
+    private void Alterar() {
+
+        if ((txt_Id.getText().isEmpty() || txt_Nome.getText().isEmpty() || txt_Telefone.getText().isEmpty() || txt_Login.getText().isEmpty() || txt_Senha.getText().isEmpty())) {
+
+        } else {
+            String sql = "update usuarios set usuario = ?, telefone = ?, login = ?, senha = ?, perfil = ? where id_user = ?";
+
+            try {
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, txt_Nome.getText());
+                pst.setString(2, txt_Telefone.getText());
+                pst.setString(3, txt_Login.getText());
+                pst.setString(4, txt_Senha.getText());
+                pst.setString(5, cb_Perfil.getSelectedItem().toString());
+                pst.setString(6, txt_Id.getText());
+                
+                //confirmação de alteração de dados de usuario
+                 int adicionado = pst.executeUpdate();
+
+                if (adicionado > 0) {
+                    JOptionPane.showMessageDialog(null, "Dados do usuário atualizados com sucesso!");
+                    //Limpando os campos
+                    txt_Id.setText(null);
+                    txt_Nome.setText(null);
+                    txt_Telefone.setText(null);
+                    txt_Login.setText(null);
+                    txt_Senha.setText(null);
+
+                } else {
+                }    
+            } catch (Exception e) {
+
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+
     }
 
     /**
@@ -176,6 +215,11 @@ public class frm_Tela_Usuarios extends javax.swing.JInternalFrame {
         btn_Editar.setToolTipText("Editar");
         btn_Editar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_Editar.setPreferredSize(new java.awt.Dimension(80, 80));
+        btn_Editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EditarActionPerformed(evt);
+            }
+        });
 
         btn_Pesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/info10/icones/pesquisar.png"))); // NOI18N
         btn_Pesquisar.setToolTipText("Pesquisar");
@@ -276,6 +320,11 @@ public class frm_Tela_Usuarios extends javax.swing.JInternalFrame {
         // Metodo adicionar
         Adicionar();
     }//GEN-LAST:event_btn_AdicionarActionPerformed
+
+    private void btn_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditarActionPerformed
+        // Chamando método alterar
+        Alterar();
+    }//GEN-LAST:event_btn_EditarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
