@@ -15,7 +15,7 @@ import br.com.info10.dal.Modulo_Conexao;
 import javax.swing.JOptionPane;
 
 public class frm_Tela_Usuarios extends javax.swing.JInternalFrame {
-    
+
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -25,73 +25,82 @@ public class frm_Tela_Usuarios extends javax.swing.JInternalFrame {
      */
     public frm_Tela_Usuarios() {
         initComponents();
-         conexao = Modulo_Conexao.conector();
+        conexao = Modulo_Conexao.conector();
     }
-    
-    private void Consultar()
-    {
+
+    private void Consultar() {
         String sql = "select * from usuarios where id_user = ?";
-        
+
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txt_Id.getText());
             rs = pst.executeQuery();
-            
+
             if (rs.next()) {
-                
+
                 txt_Nome.setText(rs.getString(2));
                 txt_Telefone.setText(rs.getString(3));
                 txt_Login.setText(rs.getString(4));
                 txt_Senha.setText(rs.getString(5));
-                
+
                 //Código abaixo refere se ao combobox cb_Perfil
                 cb_Perfil.setSelectedItem(rs.getString(6));
-               
-                
+
             } else {
-                
+
                 JOptionPane.showMessageDialog(null, "Usuário não cadastrado!");
-                
+
                 //limpando os campos
                 txt_Nome.setText(null);
                 txt_Telefone.setText(null);
                 txt_Login.setText(null);
                 txt_Senha.setText(null);
                 cb_Perfil.setSelectedItem(null);
-                
+
             }
-            
+
         } catch (Exception e) {
-            
+
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
-    private void Adicionar()
-    {
+
+    private void Adicionar() {
         String sql = "insert into usuarios(id_User, usuario, telefone, login, senha, perfil) values(?,?,?,?,?,?)";
-        
+
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txt_Id.getText());
-             pst.setString(2, txt_Nome.getText());
-              pst.setString(3, txt_Telefone.getText());
-               pst.setString(4, txt_Login.getText());
-                pst.setString(5, txt_Senha.getText());
-                 pst.setString(6, cb_Perfil.getSelectedItem().toString());
-                 //Atualizando atabela com os dados do usuario
-                 //Confirmação de inserção de dados na tabela
-                 int adicionado = pst.executeUpdate();
-                 
-                 if(adicionado > 0)
-                 {
-                     JOptionPane.showMessageDialog(null, "Registro inserido com sucesso!");
-                     
-                 }else{}
-                 
-            
+            pst.setString(2, txt_Nome.getText());
+            pst.setString(3, txt_Telefone.getText());
+            pst.setString(4, txt_Login.getText());
+            pst.setString(5, txt_Senha.getText());
+            pst.setString(6, cb_Perfil.getSelectedItem().toString());
+            //Validação de campos obrigatórios
+            if ((txt_Id.getText().isEmpty() || txt_Nome.getText().isEmpty() || txt_Telefone.getText().isEmpty() || txt_Login.getText().isEmpty() || txt_Senha.getText().isEmpty())) {
+                JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios.");//verificar registro inserido com sucesso ..erro
+
+            } else {
+            }
+
+            //Atualizando atabela com os dados do usuario
+            //Confirmação de inserção de dados na tabela
+            int adicionado = pst.executeUpdate();
+
+            if (adicionado > 0) {
+                JOptionPane.showMessageDialog(null, "Registro inserido com sucesso!");
+                //Limpando os camposset
+                txt_Id.setText(null);
+                txt_Nome.setText(null);
+                txt_Telefone.setText(null);
+                txt_Login.setText(null);
+                txt_Senha.setText(null);
+                cb_Perfil.setSelectedItem(null);
+
+            } else {
+            }
         } catch (Exception e) {
-            
+
             JOptionPane.showMessageDialog(null, e);
         }
     }
