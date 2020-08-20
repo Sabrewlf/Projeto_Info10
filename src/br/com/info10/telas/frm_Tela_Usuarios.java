@@ -109,7 +109,7 @@ public class frm_Tela_Usuarios extends javax.swing.JInternalFrame {
     private void Alterar() {
 
         if ((txt_Id.getText().isEmpty() || txt_Nome.getText().isEmpty() || txt_Telefone.getText().isEmpty() || txt_Login.getText().isEmpty() || txt_Senha.getText().isEmpty())) {
-
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
         } else {
             String sql = "update usuarios set usuario = ?, telefone = ?, login = ?, senha = ?, perfil = ? where id_user = ?";
 
@@ -121,9 +121,9 @@ public class frm_Tela_Usuarios extends javax.swing.JInternalFrame {
                 pst.setString(4, txt_Senha.getText());
                 pst.setString(5, cb_Perfil.getSelectedItem().toString());
                 pst.setString(6, txt_Id.getText());
-                
+
                 //confirmação de alteração de dados de usuario
-                 int adicionado = pst.executeUpdate();
+                int adicionado = pst.executeUpdate();
 
                 if (adicionado > 0) {
                     JOptionPane.showMessageDialog(null, "Dados do usuário atualizados com sucesso!");
@@ -135,13 +135,45 @@ public class frm_Tela_Usuarios extends javax.swing.JInternalFrame {
                     txt_Senha.setText(null);
 
                 } else {
-                }    
+                }
             } catch (Exception e) {
 
                 JOptionPane.showMessageDialog(null, e);
             }
         }
 
+    }
+
+    //Método remover
+    private void Remover() {
+
+        //Remover usuário
+        int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover o usuário?", "Atanção!", JOptionPane.YES_NO_OPTION);
+
+        if (confirma == JOptionPane.YES_OPTION) {
+            String sql = "delete from usuarios where id_user = ?";
+            try {
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, txt_Id.getText());
+
+                //confirmação de exlcusão de usuario
+                int excluido = pst.executeUpdate();
+                if (excluido > 0) {
+                    JOptionPane.showMessageDialog(null, "Usuário removido com sucesso!");
+
+                    //Limpando os camoos
+                    txt_Id.setText(null);
+                    txt_Nome.setText(null);
+                    txt_Telefone.setText(null);
+                    txt_Login.setText(null);
+                    txt_Senha.setText(null);
+                }
+
+            } catch (Exception e) {
+
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }   
     }
 
     /**
@@ -210,6 +242,11 @@ public class frm_Tela_Usuarios extends javax.swing.JInternalFrame {
         btn_Deletar.setToolTipText("Deletar");
         btn_Deletar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_Deletar.setPreferredSize(new java.awt.Dimension(80, 80));
+        btn_Deletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_DeletarActionPerformed(evt);
+            }
+        });
 
         btn_Editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/info10/icones/editar.png"))); // NOI18N
         btn_Editar.setToolTipText("Editar");
@@ -325,6 +362,11 @@ public class frm_Tela_Usuarios extends javax.swing.JInternalFrame {
         // Chamando método alterar
         Alterar();
     }//GEN-LAST:event_btn_EditarActionPerformed
+
+    private void btn_DeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DeletarActionPerformed
+        // Chamando método remover
+        Remover();
+    }//GEN-LAST:event_btn_DeletarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
