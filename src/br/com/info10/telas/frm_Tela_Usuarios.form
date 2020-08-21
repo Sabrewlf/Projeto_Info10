@@ -49,17 +49,14 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Component id="lbl_Id" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="txt_Id" min="-2" pref="47" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="lbl_Nome" min="-2" max="-2" attributes="0"/>
                           <Component id="lbl_Telefone" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_Senha" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_Id" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -80,9 +77,9 @@
                                   <Component id="cb_Perfil" max="32767" attributes="0"/>
                               </Group>
                           </Group>
+                          <Component id="txt_Id" min="-2" pref="47" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="lbl_Senha" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -102,10 +99,12 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lbl_Id" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_Id" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_Id" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -143,17 +142,17 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="lbl_Id">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Id"/>
+        <Property name="text" type="java.lang.String" value="* Id"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_Nome">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nome"/>
+        <Property name="text" type="java.lang.String" value="* Nome"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_Telefone">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Telefone"/>
+        <Property name="text" type="java.lang.String" value="* Telefone"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_Login">
@@ -163,7 +162,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_Senha">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Senha"/>
+        <Property name="text" type="java.lang.String" value="* Senha"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_Perfil">
@@ -261,6 +260,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_PesquisarActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="* Campos obrigat&#xf3;rios"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

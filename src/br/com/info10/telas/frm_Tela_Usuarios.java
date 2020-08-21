@@ -203,6 +203,7 @@ public class frm_Tela_Usuarios extends javax.swing.JInternalFrame {
         btn_Deletar = new javax.swing.JButton();
         btn_Editar = new javax.swing.JButton();
         btn_Pesquisar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -214,15 +215,15 @@ public class frm_Tela_Usuarios extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Usuários");
 
-        lbl_Id.setText("Id");
+        lbl_Id.setText("* Id");
 
-        lbl_Nome.setText("Nome");
+        lbl_Nome.setText("* Nome");
 
-        lbl_Telefone.setText("Telefone");
+        lbl_Telefone.setText("* Telefone");
 
         lbl_Login.setText("Login");
 
-        lbl_Senha.setText("Senha");
+        lbl_Senha.setText("* Senha");
 
         lbl_Perfil.setText("Perfil");
 
@@ -268,22 +269,22 @@ public class frm_Tela_Usuarios extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setText("* Campos obrigatórios");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(lbl_Id)
-                        .addGap(31, 31, 31)
-                        .addComponent(txt_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbl_Nome)
-                            .addComponent(lbl_Telefone))
+                            .addComponent(lbl_Telefone)
+                            .addComponent(lbl_Senha)
+                            .addComponent(lbl_Id))
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txt_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -298,8 +299,8 @@ public class frm_Tela_Usuarios extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txt_Login)
-                                    .addComponent(cb_Perfil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addComponent(lbl_Senha))
+                                    .addComponent(cb_Perfil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(txt_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(62, 62, 62)
@@ -315,7 +316,9 @@ public class frm_Tela_Usuarios extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_Id)
                     .addComponent(txt_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -375,6 +378,7 @@ public class frm_Tela_Usuarios extends javax.swing.JInternalFrame {
     private javax.swing.JButton btn_Editar;
     private javax.swing.JButton btn_Pesquisar;
     private javax.swing.JComboBox<String> cb_Perfil;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lbl_Id;

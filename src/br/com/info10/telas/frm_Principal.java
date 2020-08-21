@@ -79,6 +79,11 @@ public class frm_Principal extends javax.swing.JFrame {
 
         menu_Add_Cliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
         menu_Add_Cliente.setText("Cliente");
+        menu_Add_Cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_Add_ClienteActionPerformed(evt);
+            }
+        });
         menu_Cadastro.add(menu_Add_Cliente);
 
         menu_Add_Os.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_MASK));
@@ -204,6 +209,14 @@ public class frm_Principal extends javax.swing.JFrame {
         usuarios.setVisible(true);
         deskTop.add(usuarios);
     }//GEN-LAST:event_menu_Add_UsuarioActionPerformed
+
+    private void menu_Add_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Add_ClienteActionPerformed
+        // Chamando tela de Clientes
+        
+        frm_Clientes frm = new frm_Clientes();
+        frm.setVisible(true);
+        deskTop.add(frm);
+    }//GEN-LAST:event_menu_Add_ClienteActionPerformed
 
     /**
      * @param args the command line arguments
