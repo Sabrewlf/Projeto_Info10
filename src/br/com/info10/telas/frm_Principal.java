@@ -88,6 +88,11 @@ public class frm_Principal extends javax.swing.JFrame {
 
         menu_Add_Os.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_MASK));
         menu_Add_Os.setText("OS");
+        menu_Add_Os.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_Add_OsActionPerformed(evt);
+            }
+        });
         menu_Cadastro.add(menu_Add_Os);
 
         menu_Add_Usuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK));
@@ -217,6 +222,13 @@ public class frm_Principal extends javax.swing.JFrame {
         frm.setVisible(true);
         deskTop.add(frm);
     }//GEN-LAST:event_menu_Add_ClienteActionPerformed
+
+    private void menu_Add_OsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Add_OsActionPerformed
+        // Chamando a tela de ordem de serviços
+        frm_Ordem_Servico os = new frm_Ordem_Servico();
+        os.setVisible(true);
+        deskTop.add(os);
+    }//GEN-LAST:event_menu_Add_OsActionPerformed
 
     /**
      * @param args the command line arguments
