@@ -72,17 +72,17 @@ public class frm_Ordem_Servico extends javax.swing.JInternalFrame {
                 pst.setString(4, txt_Defeito.getText());
                 pst.setString(5, txt_Servico.getText());
                 pst.setString(6, txt_Tecnico.getText());
-                
+
                 //.replace subistitui a virgula pelo ponto na textbox
                 pst.setString(7, txt_Valor_Total.getText().replace(",", "."));
                 pst.setString(8, txt_Id_Cliente.getText());
-                
+
                 int adicionado = pst.executeUpdate();
-                
-                if(adicionado > 0){
-                    
+
+                if (adicionado > 0) {
+
                     JOptionPane.showMessageDialog(null, "Ordem de serviço emitida com sucesso!");
-                    
+
                     txt_Os_Equipamento.setText(null);
                     txt_Defeito.setText(null);
                     txt_Servico.setText(null);
@@ -97,47 +97,167 @@ public class frm_Ordem_Servico extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     //Método para pesquisar ordem de serviço 
-    
-    private void pesquisar_Os(){
-        
+    private void pesquisar_Os() {
+
         //o código abaixo cria uma caixa de entrada do tipo JOptionPane
-       
-        
         String num_os = JOptionPane.showInputDialog("Número da ordem de serviço");
-        
-        String sql = "select * from ordem_servico where os = " + num_os;
-        
-        try {
-            pst = conexao.prepareStatement(sql);
-            rs = pst.executeQuery();
-            
-            if(rs.next()){
-                
-                txt_N_Os.setText(rs.getString(1));
-                txt_Data_Os.setText(rs.getString(2));
-                
-                //setando os radiobuttons
-                String rb_tipo = rs.getString(3);
-                if(rb_tipo.equals("Ordem de serviço")){
-                    
-                    rB_Ordem_Servico.setSelected(true);
-                    tipo = "Ordem de serviço";
-                }else{
-                    
-                    rB_Orcamento.setSelected(true);
-                    tipo = "Orçamento";
+        if (num_os.isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "Digite o número da ordem de serviço.");
+        } else {
+
+            String sql = "select * from ordem_servico where os = " + num_os;
+
+            try {
+                pst = conexao.prepareStatement(sql);
+                rs = pst.executeQuery();
+
+                if (rs.next()) {
+
+                    txt_N_Os.setText(rs.getString(1));
+                    txt_Data_Os.setText(rs.getString(2));
+
+                    //setando os radiobuttons
+                    String rb_tipo = rs.getString(3);
+                    if (rb_tipo.equals("Ordem de serviço")) {
+
+                        rB_Ordem_Servico.setSelected(true);
+                        tipo = "Ordem de serviço";
+                    } else {
+
+                        rB_Orcamento.setSelected(true);
+                        tipo = "Orçamento";
+                    }
+
+                    cB_Situacao.setSelectedItem(rs.getString(4));
+                    txt_Os_Equipamento.setText(rs.getString(5));
+                    txt_Defeito.setText(rs.getString(6));
+                    txt_Servico.setText(rs.getString(7));
+                    txt_Tecnico.setText(rs.getString(8));
+                    txt_Valor_Total.setText(rs.getString(9));
+                    txt_Id_Cliente.setText(rs.getString(10));
+
+                    //desabilitando botão adicionar evitando cadaastro em duplicidade
+                    btn_Adicionar.setEnabled(false);
+                    //desabilitando setar cliente no txt_Pesquisar_Cliente
+                    txt_Pesquisar_Cliente.setEnabled(false);
+                    //Ocultando tabela_Clientes
+                    tabela_Clientes.setVisible(false);
+
+                } else {
+
+                    JOptionPane.showMessageDialog(null, "Ordem de serviço não cadastrada.");
+
                 }
-                
-            }else{
-                
-                JOptionPane.showMessageDialog(null, "Ordem de serviço não cadastrada.");
+
+            } catch (com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException e) {
+
+                JOptionPane.showMessageDialog(null, "Ordem de serviço inválida!");
+                //Comando abaixo usado para capturar o erro e depois coloca- lo no lugar da excessão.
+                //System.out.println(e);
+            } catch (Exception e2) {
+
+                JOptionPane.showMessageDialog(null, e2);
             }
+        }
+
+    }
+
+    private void alterar_os() {
+        
+        //Validação de campos obrigatórios
+        if ((txt_Id_Cliente.getText().isEmpty() || txt_Os_Equipamento.getText().isEmpty() || txt_Defeito.getText().isEmpty())) {
             
-        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios.");
             
-            JOptionPane.showMessageDialog(null, e);   
+        } else {
+
+            String sql = "update ordem_servico set tipo = ?, situacao = ?, equipamento = ?, defeito = ?, servico = ?, tecnico = ?, valor = ? where os = ?";
+
+            try {
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, tipo);
+                pst.setString(2, cB_Situacao.getSelectedItem().toString());
+                pst.setString(3, txt_Os_Equipamento.getText());
+                pst.setString(4, txt_Defeito.getText());
+                pst.setString(5, txt_Servico.getText());
+                pst.setString(6, txt_Tecnico.getText());
+
+                //.replace subistitui a virgula pelo ponto na textbox
+                pst.setString(7, txt_Valor_Total.getText().replace(",", "."));
+                pst.setString(8, txt_N_Os.getText());
+
+                int adicionado = pst.executeUpdate();
+
+                if (adicionado > 0) {
+
+                    JOptionPane.showMessageDialog(null, "Ordem de serviço alterada com sucesso.");
+
+                    txt_N_Os.setText(null);
+                    txt_Data_Os.setText(null);
+                    txt_Os_Equipamento.setText(null);
+                    txt_Defeito.setText(null);
+                    txt_Servico.setText(null);
+                    txt_Tecnico.setText(null);
+                    txt_Valor_Total.setText(null);
+                    txt_Id_Cliente.setText(null);
+                    
+                    //Habilitando botão adicionar
+                    btn_Adicionar.setEnabled(true);
+                    //Habilitando setar cliente no txt_Pesquisar_Cliente
+                    txt_Pesquisar_Cliente.setEnabled(true);
+                    // tabela_Clientes
+                    tabela_Clientes.setVisible(true);
+                }
+
+            } catch (Exception e) {
+
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+
+    }
+    
+    //Excluir ordem de serviço
+    private void excluir_os(){
+        
+        int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja exlcuir a ordem de serviço?", "Atenção", JOptionPane.YES_NO_OPTION);
+        if(confirma == JOptionPane.YES_OPTION){
+            
+            String sql = "delete from ordem_servico where os = ?";
+            
+            try {
+                 pst = conexao.prepareStatement(sql);
+                 pst.setString(1, txt_N_Os.getText());
+                 
+                 int removido = pst.executeUpdate();
+                 if(removido > 0){
+                     
+                     JOptionPane.showMessageDialog(null, "Ordem de serviço removida com sucesso.");
+                     
+                     txt_N_Os.setText(null);
+                    txt_Data_Os.setText(null);
+                    txt_Os_Equipamento.setText(null);
+                    txt_Defeito.setText(null);
+                    txt_Servico.setText(null);
+                    txt_Tecnico.setText(null);
+                    txt_Valor_Total.setText(null);
+                    txt_Id_Cliente.setText(null);
+                    
+                    //Habilitando botão adicionar
+                    btn_Adicionar.setEnabled(true);
+                    //Habilitando setar cliente no txt_Pesquisar_Cliente
+                    txt_Pesquisar_Cliente.setEnabled(true);
+                    // tabela_Clientes
+                    tabela_Clientes.setVisible(true);
+                 }
+                
+            } catch (Exception e) {
+                
+                JOptionPane.showMessageDialog(null, e);
+            }
         }
     
     }
@@ -275,7 +395,7 @@ public class frm_Ordem_Servico extends javax.swing.JInternalFrame {
 
         lbl_Situacao.setText("Situação");
 
-        cB_Situacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Na Bancada(Em reparo)", "Entraga OK", "Orçamento Reprovado", "Aguardando Aprovação", "Aguardando Peças", "Abandonado pelo cliente", "Retornou", " " }));
+        cB_Situacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Na Bancada", "Entraga OK", "Orçamento Reprovado", "Em Aprovação", "Aguardando Peças", "Abandonado", "Retornou", " " }));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Cliente"));
 
@@ -494,11 +614,15 @@ public class frm_Ordem_Servico extends javax.swing.JInternalFrame {
 
     private void btn_DeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DeletarActionPerformed
         // Chamando método remover
+        
+        excluir_os();
 
     }//GEN-LAST:event_btn_DeletarActionPerformed
 
     private void btn_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditarActionPerformed
         // Chamando método alterar
+        
+        alterar_os();
 
     }//GEN-LAST:event_btn_EditarActionPerformed
 
