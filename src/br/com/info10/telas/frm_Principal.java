@@ -32,7 +32,6 @@ public class frm_Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         deskTop = new javax.swing.JDesktopPane();
-        jLabel1 = new javax.swing.JLabel();
         lbl_Usuario = new javax.swing.JLabel();
         lbl_Data = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -66,8 +65,6 @@ public class frm_Principal extends javax.swing.JFrame {
             deskTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 480, Short.MAX_VALUE)
         );
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/info10/icones/3d_system_folder_20520 (2).png"))); // NOI18N
 
         lbl_Usuario.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbl_Usuario.setText("Usuário");
@@ -157,10 +154,9 @@ public class frm_Principal extends javax.swing.JFrame {
                 .addComponent(deskTop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_Usuario)
                     .addComponent(lbl_Data))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,9 +168,7 @@ public class frm_Principal extends javax.swing.JFrame {
                 .addComponent(lbl_Usuario)
                 .addGap(33, 33, 33)
                 .addComponent(lbl_Data)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(85, 85, 85))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setSize(new java.awt.Dimension(823, 522));
@@ -267,7 +261,6 @@ public class frm_Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane deskTop;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel lbl_Data;
     public static javax.swing.JLabel lbl_Usuario;
